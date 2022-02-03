@@ -7,9 +7,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.application.modul3.book.dto.BookDTO;
+import com.application.modul3.book.mapper.BookMapper;
 
 @RestController // face ca acest controller sa fie primul nivel din schema noastra si sa stie ca
 				// frontend-ul va comunica cu acest prim nivel
@@ -18,14 +22,18 @@ public class BookController {
 	@Autowired
 	private BookService bookService;
 
+	@Autowired
+	private BookMapper bookMapper;
+	
 	@PostMapping
-	public Book createUser(@RequestBody Book book) {
-		return bookService.createBook(book);
+	public BookDTO createBook(@RequestBody BookDTO bookDTO) {
+		Book createdBook = bookService.createBook(bookMapper.bookDTO2Book(bookDTO));
+		return bookMapper.book2BookDTO(createdBook);
 	}
 	
 	@GetMapping("/list")
-	public List<Book> getAllooks() {
-		return bookService.getAllBooks();
+	public List<BookDTO> getAllooks() {
+		return bookMapper.bookList2BookListDTO(bookService.getAllBooks());
 	}
 
 	@GetMapping("/{id}")
@@ -35,6 +43,17 @@ public class BookController {
 	
 	@DeleteMapping("/{id}")
 	public void deleteBookById(@PathVariable Integer id) {
-		bookService.deleteUserById(id);
+		bookService.deleteBookById(id);
+	}
+	
+	@PutMapping("/{id}")
+	public Book updateBook(@RequestBody Book book, @PathVariable Integer id) {
+		return bookService.updateBook(book, id);
+	}
+
+	@GetMapping("/{title}")
+	public List<Book> findByTitle(@PathVariable("title") String title) {
+		return bookService.findByTitle(title);
+
 	}
 }

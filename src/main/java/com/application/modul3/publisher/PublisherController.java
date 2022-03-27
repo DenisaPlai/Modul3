@@ -18,26 +18,21 @@ import com.application.modul3.publisher.mapper.PublisherMapper;
 @RestController
 @RequestMapping("/publishers")
 public class PublisherController {
-
 	@Autowired
 	private PublisherService publisherService;
 	@Autowired
-	private PublisherMapper publisherMapper;
-	
+	private PublisherMapper publisherMappper;
+
 	@PostMapping
-	public PublisherDTO createPublishe(@RequestBody PublisherDTO publisherDTO) {
-		Publisher createdPublishe = publisherService.createPublisher(publisherMapper.publisherDTO2Publisher(publisherDTO));
-		return publisherMapper.publisher2PublisherDTO(createdPublishe);
+	public PublisherDTO createPublisher(@RequestBody PublisherDTO publisherDTO) {
+		Publisher createdPublisher = publisherService
+				.createPublisher(publisherMappper.publisherDTOToPublisher(publisherDTO));
+		return publisherMappper.publisherToPublisherDTO(createdPublisher);
 	}
-	
-	@GetMapping("/{id}")
-	public Publisher getPublisherById (@PathVariable Integer id) {
-		return publisherService.getPublisherById(id);
-	}
-	
-	@DeleteMapping("/{id}")
-	public void deletePublisherById(@PathVariable Integer id) {
-		publisherService.deletePublisherById(id);
+
+	@GetMapping("/list")
+	public List<PublisherDTO> getAllPublishers() {
+		return publisherMappper.publisherListToPublisherListDTO(publisherService.getAllPublishers());
 	}
 
 	@PutMapping("/{id}")
@@ -45,10 +40,9 @@ public class PublisherController {
 		return publisherService.updatePublisher(publisher, id);
 	}
 
-	@GetMapping("/{name}")
-	public List<Publisher> findByName(@PathVariable("name") String name) {
-		return publisherService.findByName(name);
-
+	@DeleteMapping("/{id}")
+	public void detelePublisherById(@PathVariable Integer id) {// de ce se pune PATH VARIABLE?
+		publisherService.detelePublisherById(id);
 	}
-	
+
 }

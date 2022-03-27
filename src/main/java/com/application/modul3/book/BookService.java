@@ -1,59 +1,61 @@
 package com.application.modul3.book;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.application.modul3.author.Author;
+import com.application.modul3.author.AuthorService;
+import com.application.modul3.exception.ResourceNotFoundException;
 
 @Service
 public class BookService {
 
 	@Autowired
 	private BookRepository bookRepository;
-	
-	// cream o inregistre si o salvam
-		public Book createBook(Book book) {
-			return bookRepository.saveAndFlush(book);
-		}
+	@Autowired
+	private AuthorService authorService;
 
-		// obtinem toate inre din db
-		public List<Book> getAllBooks() {
-			return bookRepository.findAll();
-		}
+	// cream o carte si o salvam
+	public Book createBook(Book book) {
+		return bookRepository.saveAndFlush(book);
+	}
 
-		// obtinem o inregistare dupa id
-		public Book getBookById(Integer id) {
-			// declaram o carte optionala ca fiind cartea cu id- specificat
-			Optional<Book> bookOpt = bookRepository.findById(id);
-			if (bookOpt.isPresent()) {
-				return bookOpt.get();
-			}
-			return null;
+	public Book createBook(Book book, Set<Integer> authorIds) {
+		Set<Author> authors = authorService.getAuthors(authorIds);
+		for (Author author : authors) {
+			book.addAuthor(author);
 		}
+		return bookRepository.save(book);
+	}
 
-		// stergerea unei carte
-		public void deleteBookById(Integer id) {
-			bookRepository.deleteById(id);
-		}
+	// obtinem toate cartile din db
+	public List<Book> getAllBooks() {
+		return bookRepository.findAll();
+	}
 
-		// update
-		public Book updateBook(Book book, Integer id) {
-			Book bookUpdate = getBookById(id);
-			bookUpdate.setTitle(book.getTitle());
-			bookUpdate.setYear(book.getYear());
-			bookUpdate.setIsbn(book.getIsbn());
-			bookRepository.flush();
-			return bookUpdate;
-		}
+	// obtinem o carte dupa id
+	public Book getBookById(Integer id) {
+		return bookRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Book not found"));
+	}
 
-		public List<Book> findByTitle(String title) {
-			List<Book> listBookByTitle = new ArrayList<>();
-					
-			listBookByTitle.addAll(bookRepository.findByTitle(title));
-			
-			return listBookByTitle;
+	// stergerea unei carti
+	public void deleteBookById(Integer id) {
+		bookRepository.deleteById(id);
+	}
 
-		}
+	/*
+	 * // update-DE SCHIMBAT CU DTO public Book updateBook(Book book, Integer id) {
+	 * Book bookUpdate = getBookById(id);
+	 * bookUpdate.setTitleBook(book.getTitleBook());
+	 * bookUpdate.setYearBook(book.getYearBook());
+	 * bookUpdate.setIsbnBook(book.getIsbnBook()); bookRepository.flush(); return
+	 * bookUpdate; }
+	 * 
+	 * // testata doar de Camelia! public List<Book> findByTitle(String title) {
+	 * return bookRepository.findByTitle(title); }
+	 */
+
 }

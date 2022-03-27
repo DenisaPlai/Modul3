@@ -2,6 +2,8 @@ package com.application.modul3.author;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,10 @@ public class AuthorService {
 	// obtinerea tuturor autorilor
 	public List<Author> getAllAuthor() {
 		return authorRepository.findAll();
+	}
+	
+	public Set<Author> getAuthors(Set<Integer> authorIds) {
+		return authorRepository.findByIdIn(authorIds);
 	}
 
 	// obtinerea unui autor dupa id
@@ -38,9 +44,9 @@ public class AuthorService {
 	public Author updateAuthorById(Author author, Integer id) {
 		Author updateAuthor = getAuthorById(id);
 		updateAuthor.setName(author.getName());
-		updateAuthor.setBirthDate(author.getBirthDate());
+		updateAuthor.setBirthDate(String.valueOf(author.getBirthDate()));
 		updateAuthor.setGender(author.getGender());
-		updateAuthor.setDeathDate(author.getDeathDate());
+		updateAuthor.setDeathDate(String.valueOf(author.getDeathDate()));
 		authorRepository.flush();
 		return updateAuthor;
 	}
@@ -48,6 +54,7 @@ public class AuthorService {
 	// gasirea unui autor dupa nume
 	public Author getAuthorByName(String name) {
 		return authorRepository.findByNameContaining(name);
+		
 	}
 
 	// gasirea autorilor care nu au decedat

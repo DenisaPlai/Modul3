@@ -7,7 +7,7 @@ public class ExemplaryDTO {
 	private LocalDate date;
 	private String code;
 	private Integer pageNumbers;
-
+	
 	public Integer getId() {
 		return id;
 	}
@@ -39,4 +39,5 @@ public class ExemplaryDTO {
 	public void setPageNumbers(Integer pageNumbers) {
 		this.pageNumbers = pageNumbers;
 	}
+
 }

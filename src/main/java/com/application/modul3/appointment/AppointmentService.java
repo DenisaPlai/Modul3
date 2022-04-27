@@ -1,7 +1,6 @@
 package com.application.modul3.appointment;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -14,7 +13,6 @@ import com.application.modul3.exemplary.Exemplary;
 import com.application.modul3.exemplary.ExemplaryRepository;
 import com.application.modul3.user.User;
 import com.application.modul3.user.UserRepository;
-import com.application.modul3.user.UserService;
 
 @Service
 public class AppointmentService {
@@ -51,9 +49,7 @@ public class AppointmentService {
 		user.addAppointment(appointment);
 		appointmentRepository.saveAndFlush(appointment);
 	}
-	
-	
-	
+
 	public List<Exemplary> getExemplariesForPeriod(LocalDate dateFrom, LocalDate dateUntil, Integer bookId) {
 		return exemplaryRepository.getExemplariesForPeriod(dateFrom, dateUntil, bookId);
 	}

@@ -9,18 +9,17 @@ import com.application.modul3.book.dto.BookCreateDTO;
 
 @Component
 public class BookMapper {
-	//@Autowired ExemplaryMapper exemplaryMapper;
-	
+	// @Autowired ExemplaryMapper exemplaryMapper;
+
 	public BookDTO book2BookDTO(Book book) {
 		BookDTO bookDTO = new BookDTO();
 		bookDTO.setId(book.getId());
 		bookDTO.setTitle(book.getTitleBook());
 		bookDTO.setIsbn(book.getIsbnBook());
 		bookDTO.setYear(book.getYearBook());
-		//bookDTO.setExemplaryListDTO(exemplaryMapper.exemplaryList2ExemplaryListDTO(book.getExemplaryList()));
 		return bookDTO;
 	}
-	
+
 	public Book bookDTO2Book(BookDTO bookDTO) {
 		Book book = new Book();
 		book.setTitleBook(bookDTO.getTitle());
@@ -37,16 +36,16 @@ public class BookMapper {
 //		}
 //		return bookListDTO;
 	}
-	
+
 	public BookCreateDTO book2BookCreateDTO(Book book) {
 		BookCreateDTO bookCreateDTO = new BookCreateDTO();
 		bookCreateDTO.setTitle(book.getTitleBook());
 		bookCreateDTO.setIsbn(book.getIsbnBook());
 		bookCreateDTO.setYear(book.getYearBook());
-		//bookDTO.setExemplaryListDTO(exemplaryMapper.exemplaryList2ExemplaryListDTO(book.getExemplaryList()));
+		// bookDTO.setExemplaryListDTO(exemplaryMapper.exemplaryList2ExemplaryListDTO(book.getExemplaryList()));
 		return bookCreateDTO;
 	}
-	
+
 	public Book bookCreateDTO2Book(BookCreateDTO bookCreateDTO) {
 		Book book = new Book();
 		book.setTitleBook(bookCreateDTO.getTitle());
@@ -54,5 +53,5 @@ public class BookMapper {
 		book.setIsbnBook(bookCreateDTO.getIsbn());
 		return book;
 	}
-	
+
 }

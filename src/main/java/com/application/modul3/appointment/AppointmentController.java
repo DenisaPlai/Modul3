@@ -19,7 +19,9 @@ import com.application.modul3.exemplary.Exemplary;
 import com.application.modul3.exemplary.dto.ExemplaryDTO;
 import com.application.modul3.exemplary.mapper.ExemplaryMapper;
 
+//@RestController It's a annotation that combines @Controller and @ResponseBody
 @RestController
+//@RequestMapping It is used to map the web requests.
 @RequestMapping("/appointments")
 public class AppointmentController {
 	@Autowired
@@ -43,14 +45,14 @@ public class AppointmentController {
 		return appointmentMapper.appointmentDBList2AppointmentList(appointmentDBs);
 	}
 
-	@PostMapping("/find") ////////// NOT WORKING
+	@PostMapping("/find")
 	public List<ExemplaryDTO> getExemplariesForPeriod(@RequestBody AppointmentInfoDTO appointmentInfoDTO) {
 		List<Exemplary> exemplaries = appointmentService.getExemplariesForPeriod(appointmentInfoDTO.getDateFrom(),
 				appointmentInfoDTO.getDateUntil(), appointmentInfoDTO.getBookId());
 		return exemplaryMapper.exemplaryList2ExemplaryDTOList(exemplaries);
 	}
 
-	@PostMapping("/book/{exemplaryId}/{userId}") /// perioada e scrisa in body
+	@PostMapping("/book/{exemplaryId}/{userId}")
 	public void book(@RequestBody AppointmentCreateDTO appointmentCreateDTO, @PathVariable Integer exemplaryId,
 			@PathVariable Integer userId) {
 		appointmentService.book(appointmentMapper.appointmnetCreateDTO2Appointment(appointmentCreateDTO), exemplaryId,

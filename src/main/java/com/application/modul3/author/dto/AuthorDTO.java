@@ -13,7 +13,6 @@ public class AuthorDTO {
 	private LocalDate birthDate;
 	private Gender gender;
 	private LocalDate deathDate;
-	//private String nationality;
 
 	public Integer getId() {
 		return id;
@@ -31,7 +30,7 @@ public class AuthorDTO {
 		this.name = name;
 	}
 
-	@JsonFormat(pattern="yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
 	public LocalDate getBirthDate() {
 		return birthDate;
@@ -41,7 +40,7 @@ public class AuthorDTO {
 		this.birthDate = birthDate;
 	}
 
-	@JsonFormat(pattern="yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
 	public LocalDate getDeathDate() {
 		return deathDate;
@@ -51,14 +50,6 @@ public class AuthorDTO {
 		this.deathDate = deathDate;
 	}
 
-	/*
-	 * public String getNationality() { return nationality; }
-	 */
-
-	/*
-	 * public void setNationality(String nationality) { this.nationality =
-	 * nationality; }
-	 */
 
 	public Gender getGender() {
 		return gender;

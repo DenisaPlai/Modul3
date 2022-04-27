@@ -11,23 +11,23 @@ import com.application.modul3.user.dto.UserDTO;
 
 @Service
 public class UserMapper {
-	
+
 	public User userCreateDTO2User(UserCreateDTO userCreateDTO) {
 		User user = new User();
 		user.setLastName(userCreateDTO.getLastName());
 		user.setFirstName(userCreateDTO.getFirstName());
 		user.setAddress(userCreateDTO.getAddress());
 		user.setMail(userCreateDTO.getMail());
-		return user;	
+		return user;
 	}
 
 	public UserDTO user2UserDTO(User user) {
-	UserDTO userDTO = new UserDTO();
-	userDTO.setId(user.getId());
-	userDTO.setLastName(user.getLastName());
-	userDTO.setFirstName(user.getFirstName());
-	userDTO.setAddress(user.getAddress());
-	userDTO.setMail(user.getMail());
+		UserDTO userDTO = new UserDTO();
+		userDTO.setId(user.getId());
+		userDTO.setLastName(user.getLastName());
+		userDTO.setFirstName(user.getFirstName());
+		userDTO.setAddress(user.getAddress());
+		userDTO.setMail(user.getMail());
 		return userDTO;
 	}
 

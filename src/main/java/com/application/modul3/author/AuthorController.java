@@ -23,7 +23,6 @@ public class AuthorController {
 	@Autowired
 	private AuthorMapper authorMapper;
 
-
 	@PostMapping
 	public AuthorDTO createAuthor(@RequestBody AuthorDTO authorDTO) {
 		Author aut = authorService.createAuthor(authorMapper.authorDTO2Author(authorDTO));

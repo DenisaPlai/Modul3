@@ -15,16 +15,19 @@ import javax.persistence.Table;
 import com.application.modul3.exemplary.Exemplary;
 import com.application.modul3.user.User;
 
+//An entity represents a table stored in a database
+//Every instance of an entity represents a row in the table.
 @Entity(name = "appointment")
 @Table(name = "appointment", schema = "administration")
 public class Appointment {
 
-	@Id
-	@Column(name = "id")
+	@Id //defines the primary key
+	@Column(name = "id")//mention the details of a column in the table.
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	//stores the id value and has a foreign key to the exemplary
 	@JoinColumn(name = "exemplary_id")
 	private Exemplary exemplary;
 

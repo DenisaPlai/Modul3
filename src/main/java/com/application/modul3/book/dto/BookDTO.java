@@ -8,8 +8,8 @@ public class BookDTO {
 	private String title;
 	private LocalDate year;
 	private String isbn;
-	//private List<ExemplaryDTO> exemplaryDTO; -> de facut getter + setter
-	
+	// private List<ExemplaryDTO> exemplaryDTO; -> de facut getter + setter
+
 	public Integer getId() {
 		return id;
 	}

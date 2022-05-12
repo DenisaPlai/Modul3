@@ -29,9 +29,5 @@ public class AppointmentMapper {
 		return appointment;
 	}
 
-	/*
-	 * public List<AppointmentDTO>
-	 * appointmentList2AppointmentListDTO(List<Appointment> appointmentDBs) { //
-	 * TODO Auto-generated method stub return null; }
-	 */
+	
 }
